@@ -7,8 +7,8 @@ As the practical outcome, the project delivers a prototype of the User microserv
 which represents one of the decomposed domains from the original monolithic application.
 
 ## Project Setup
-
-**Java version:** `17.0.6-tem`
+**Versions:**\
+Java `17.0.6-tem`
 
 ### Sdkman
 The service was done using a MacOs system. 
