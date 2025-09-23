@@ -26,4 +26,13 @@ To use the version in .sdkmanrc:
 sdk env
 ```
 
+### Docker
+
+[Docker installation guide](https://docs.docker.com/get-started/)
+
+Start docker containers:
+```
+docker-compose up
+```
+
 
