@@ -10,22 +10,13 @@ import java.math.BigDecimal;
 public class AddressDTO {
 
     private Long addressId;
-
     private String addressName;
-
     private String number;
-
     private String complement;
-
     private String postalCode;
-
     private String city;
-
     private String state;
-
     private String country;
-
     private BigDecimal latitude;
-
     private BigDecimal longitude;
 }
