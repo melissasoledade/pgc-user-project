@@ -42,6 +42,9 @@ public class Address {
     private String postalCode;
 
     @Column(nullable = false)
+    private String neighbourhood;
+
+    @Column(nullable = false)
     private String city;
 
     @Column(nullable = false)

@@ -13,6 +13,7 @@ public class AddressDTO {
     private String number;
     private String complement;
     private String postalCode;
+    private String neighbourhood;
     private String city;
     private String state;
     private String country;

@@ -13,6 +13,8 @@ public interface AddressMapper {
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
     @Mapping(target = "addressId", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     Address toAddress(AddressDTO addressDTO);
 
     @InheritInverseConfiguration
