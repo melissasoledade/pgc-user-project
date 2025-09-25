@@ -16,8 +16,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
 @Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

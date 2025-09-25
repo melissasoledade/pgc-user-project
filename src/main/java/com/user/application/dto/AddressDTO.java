@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Builder
 public class AddressDTO {
 
-    private Long addressId;
     private String addressName;
     private String number;
     private String complement;
