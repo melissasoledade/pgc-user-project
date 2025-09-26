@@ -12,11 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class UserMapperTest {
+class UserMapperTest {
 
     @Autowired
     private UserMapper userMapper;
@@ -31,7 +32,7 @@ public class UserMapperTest {
     private UserProfilesMapper userProfilesMapper;
 
     @Test
-    void shouldMapUserDTOToUser() throws ParseException {
+    void shouldMapUserDTOToUserEntity() throws ParseException {
         // given
         final User user = UserHelper.defaultUser().build();
         final UserDTO userDTO = UserDTOHelper.defaultUserDTO().build();
@@ -66,6 +67,39 @@ public class UserMapperTest {
 
         assertNull(result.getCreatedAt());
         assertNull(result.getId());
+    }
+
+    @Test
+    void shouldMapUserEntityToUserDTO() throws ParseException {
+        // given
+        final User user = UserHelper.defaultUser().build();
+        final UserDTO userDTO = UserDTOHelper.defaultUserDTO().build();
+
+        // when
+        final UserDTO result = userMapper.fromUser(user);
+
+        // then
+        assertEquals(userDTO.getCpf(), result.getCpf());
+        assertEquals(userDTO.getGender(), result.getGender());
+        assertEquals(userDTO.getName(), result.getName());
+        assertEquals(userDTO.getPhoneNumber(), result.getPhoneNumber());
+        assertEquals(userDTO.getEmail(), result.getEmail());
+        assertEquals(userDTO.getBirthDate(), result.getBirthDate());
+
+        assertEquals(userDTO.getProfilesDTO().getProfileCode(),
+                result.getProfilesDTO().getProfileCode());
+        assertEquals(userDTO.getProfilesDTO().getProfileName(),
+                result.getProfilesDTO().getProfileName());
+
+        assertEquals(userDTO.getAddressDTO().getAddressName(),
+                result.getAddressDTO().getAddressName());
+        assertEquals(userDTO.getAddressDTO().getNumber(),
+                result.getAddressDTO().getNumber());
+
+        assertEquals(userDTO.getPreferencesDTO().getTimeZone(),
+                result.getPreferencesDTO().getTimeZone());
+        assertEquals(userDTO.getPreferencesDTO().getLanguage(),
+                result.getPreferencesDTO().getLanguage());
     }
 
 }
