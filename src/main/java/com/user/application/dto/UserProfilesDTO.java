@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class UserProfilesDTO {
 
-    private String profileCode;
+    private Long profileCode;
     private String profileName;
 }

@@ -15,7 +15,7 @@ public class UserDTO {
     private String cpf;
     private String gender;
     private Date birthDate;
-    private Long userPreferencesId;
-    private Long userProfilesId;
-    private Long addressId;
+    private AddressDTO addressDTO;
+    private UserProfilesDTO profilesDTO;
+//    private UserPreferencesDTO preferencesDTO;
 }

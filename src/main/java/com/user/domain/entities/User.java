@@ -49,17 +49,17 @@ public class User {
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
 
-    @OneToOne(targetEntity = UserPreferences.class)
-    @JoinColumn(name = "user_preferences_id")
-    private Long userPreferencesId;
+//    @OneToOne(targetEntity = UserPreferences.class)
+//    @JoinColumn(name = "user_preferences_id")
+//    private Long userPreferencesId;
 
     @OneToOne(targetEntity = UserProfiles.class)
     @JoinColumn(name = "user_profiles_id")
-    private Long userProfilesId;
+    private UserProfiles userProfiles;
 
     @OneToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id")
-    private Long addressId;
+    private Address address;
 
     @CreationTimestamp
     @Column(nullable = false)
