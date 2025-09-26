@@ -7,11 +7,11 @@ import java.util.Date;
 
 public class DateHelper {
 
-    public static DateFormat defaultDateFormat(String pattern) {
+    public static DateFormat dateFormat(String pattern) {
         return new SimpleDateFormat(pattern);
     }
 
     public static Date parseDateFromString(String pattern, String textDate) throws ParseException {
-        return defaultDateFormat(pattern).parse(textDate);
+        return dateFormat(pattern).parse(textDate);
     }
 }
