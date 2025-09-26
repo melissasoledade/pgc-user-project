@@ -12,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +23,9 @@ public class UserMapperTest {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    @Autowired
+    private UserPreferencesMapper userPreferencesMapper;
 
     @Autowired
     private UserProfilesMapper userProfilesMapper;
@@ -55,6 +57,12 @@ public class UserMapperTest {
         assertEquals(user.getAddress().getNumber(),
                 result.getAddress().getNumber());
         assertNull(result.getAddress().getAddressId());
+
+        assertEquals(user.getUserPreferences().getTimeZone(),
+                result.getUserPreferences().getTimeZone());
+        assertEquals(user.getUserPreferences().getLanguage(),
+                result.getUserPreferences().getLanguage());
+        assertNull(result.getUserPreferences().getUserPreferencesId());
 
         assertNull(result.getCreatedAt());
         assertNull(result.getId());

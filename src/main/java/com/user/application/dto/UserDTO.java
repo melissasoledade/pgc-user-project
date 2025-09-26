@@ -17,5 +17,5 @@ public class UserDTO {
     private Date birthDate;
     private AddressDTO addressDTO;
     private UserProfilesDTO profilesDTO;
-//    private UserPreferencesDTO preferencesDTO;
+    private UserPreferencesDTO preferencesDTO;
 }

@@ -18,6 +18,7 @@ public class UserDTOHelper {
                 .gender("feminine")
                 .birthDate(formatter.parse("1999-01-01"))
                 .addressDTO(AddressDTOHelper.defaultAddressDTO().build())
-                .profilesDTO(UserProfilesDTOHelper.defaultUserProfilesDTO().build());
+                .profilesDTO(UserProfilesDTOHelper.defaultUserProfilesDTO().build())
+                .preferencesDTO(UserPreferencesDTOHelper.defaultUserPreferencesDTO().build());
     }
 }

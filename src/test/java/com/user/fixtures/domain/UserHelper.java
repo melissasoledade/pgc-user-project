@@ -19,6 +19,7 @@ public class UserHelper {
                 .gender("feminine")
                 .birthDate(formatter.parse("1999-01-01"))
                 .address(AddressHelper.defaultAddress().build())
-                .userProfiles(UserProfilesHelper.defaultUserProfiles().build());
+                .userProfiles(UserProfilesHelper.defaultUserProfiles().build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences().build());
     }
 }

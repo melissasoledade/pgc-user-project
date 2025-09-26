@@ -49,9 +49,9 @@ public class User {
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
 
-//    @OneToOne(targetEntity = UserPreferences.class)
-//    @JoinColumn(name = "user_preferences_id")
-//    private Long userPreferencesId;
+    @OneToOne(targetEntity = UserPreferences.class)
+    @JoinColumn(name = "user_preferences_id")
+    private UserPreferences userPreferences;
 
     @OneToOne(targetEntity = UserProfiles.class)
     @JoinColumn(name = "user_profiles_id")

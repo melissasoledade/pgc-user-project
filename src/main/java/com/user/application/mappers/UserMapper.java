@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring",
-        uses = { AddressMapper.class, UserProfilesMapper.class})
+        uses = { AddressMapper.class, UserProfilesMapper.class, UserPreferencesMapper.class })
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
@@ -18,6 +18,7 @@ public interface UserMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(source = "addressDTO", target = "address")
     @Mapping(source = "profilesDTO", target = "userProfiles")
+    @Mapping(source = "preferencesDTO", target = "userPreferences")
     User toUser(UserDTO userDTO);
 
     @InheritInverseConfiguration
