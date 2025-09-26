@@ -1,16 +1,16 @@
 services:
   postgres:
     image: postgres:16
-    container_name: postgres-user
+    container_name: postgres-users
     ports:
       - 5432:5432
     volumes:
-      - postgres-user:/var/lib/postgresql/data
+      - postgres-users:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: user
+      POSTGRES_DB: users
       POSTGRES_USER: person
       POSTGRES_PASSWORD: admin
 
 volumes:
-  postgres-user:
-  localstack-user:
+  postgres-users:
+  localstack-users:
