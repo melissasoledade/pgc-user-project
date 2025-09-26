@@ -11,6 +11,7 @@ public class UserHelper {
     public static User.UserBuilder defaultUser() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return User.builder()
+                .id(4L)
                 .name("Ana da Silva")
                 .phoneNumber("+5511988888888")
                 .email("ana@gmail.com")
