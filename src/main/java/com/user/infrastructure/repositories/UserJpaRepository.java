@@ -36,4 +36,10 @@ public class UserJpaRepository implements BaseUserRepository {
         this.repository.deleteById(id);
         return Boolean.TRUE;
     }
+
+    @Override
+    public Boolean deleteAll() {
+        this.repository.deleteAll();
+        return Boolean.TRUE;
+    }
 }

@@ -14,4 +14,6 @@ public interface BaseUserRepository {
     List<User> findUsersByIds(List<Long> userIds);
 
     Boolean deleteUserById(Long id);
+
+    Boolean deleteAll();
 }
