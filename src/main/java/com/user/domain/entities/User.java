@@ -1,5 +1,6 @@
 package com.user.domain.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,15 +50,15 @@ public class User {
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
 
-    @OneToOne(targetEntity = UserPreferences.class)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_preferences_id")
     private UserPreferences userPreferences;
 
-    @OneToOne(targetEntity = UserProfiles.class)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_profiles_id")
     private UserProfiles userProfiles;
 
-    @OneToOne(targetEntity = Address.class)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_id")
     private Address address;
 

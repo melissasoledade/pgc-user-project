@@ -16,9 +16,6 @@ public class UserHelper {
                 .email("ana@gmail.com")
                 .cpf("99999999999")
                 .gender("feminine")
-                .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"))
-                .address(AddressHelper.defaultAddress().build())
-                .userProfiles(UserProfilesHelper.defaultUserProfiles().build())
-                .userPreferences(UserPreferencesHelper.defaultUserPreferences().build());
+                .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"));
     }
 }
