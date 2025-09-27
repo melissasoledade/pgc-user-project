@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -130,6 +132,106 @@ class UserJpaRepositoryIT {
         assertEquals("SP", result.get().getAddress().getState());
         assertEquals("tenant", result.get().getUserProfiles().getProfileName());
         assertEquals(Boolean.FALSE, result.get().getUserPreferences().getWhatsAppPromotional());
+        assertNotNull(result.get().getAddress().getAddressId());
+        assertNotNull(result.get().getUserPreferences().getUserPreferencesId());
+        assertNotNull(result.get().getUserProfiles().getUserProfilesId());
+    }
+
+    @Transactional
+    @Test
+    void shouldNotFindUserByIdWhenIsNotSaved() throws ParseException {
+        // given
+        final User user = UserHelper.defaultUser()
+                .id(1L)
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
+
+        // when
+        final Optional<User> result = this.repository.findUserById(1L);
+
+        // then
+        assertThat(result).isEmpty();
+    }
+
+    @Transactional
+    @Test
+    void shouldFindUsersById() throws ParseException {
+        // given
+        final User firstUser = UserHelper.defaultUser()
+                .id(null)
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
+        final User secondUser = UserHelper.defaultUser()
+                .id(null)
+                .name("Beatriz Santos")
+                .cpf("88888888888")
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
+
+        final User savedFirstUser = this.repository.saveUser(firstUser);
+        final User savedSecondUser = this.repository.saveUser(secondUser);
+
+        // when
+        final List<User> users = this.repository.findUsersByIds(
+                List.of(savedFirstUser.getId(), savedSecondUser.getId()));
+
+        // then
+        assertThat(users)
+                .hasSize(2)
+                .extracting(User::getId)
+                .containsExactlyInAnyOrder(savedFirstUser.getId(), savedSecondUser.getId());
+
+    }
+
+    @Transactional
+    @Test
+    void shouldDeleteUserById() throws ParseException {
+        // given
+        final User user = UserHelper.defaultUser()
+                .id(null)
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
+
+        final User savedUser = this.repository.saveUser(user);
+
+        // when
+        this.repository.deleteUserById(savedUser.getId());
+        final Optional<User> result = this.repository.findUserById(savedUser.getId());
+
+        // then
+        assertThat(result).isEmpty();
     }
 
 }

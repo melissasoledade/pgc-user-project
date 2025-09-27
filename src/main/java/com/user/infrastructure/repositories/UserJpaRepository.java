@@ -32,14 +32,12 @@ public class UserJpaRepository implements BaseUserRepository {
     }
 
     @Override
-    public Boolean deleteUserById(Long id) {
+    public void deleteUserById(Long id) {
         this.repository.deleteById(id);
-        return Boolean.TRUE;
     }
 
     @Override
-    public Boolean deleteAll() {
+    public void deleteAll() {
         this.repository.deleteAll();
-        return Boolean.TRUE;
     }
 }
