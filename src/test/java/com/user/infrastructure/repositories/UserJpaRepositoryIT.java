@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-class UserJpaRepositoryIT {
+class UserRepositoryIT {
 
     @Autowired
-    private UserJpaRepository repository;
+    private UserRepository repository;
 
     @BeforeEach
     void setup() {
