@@ -1,6 +1,6 @@
 package com.user.fixtures.application;
 
-import com.user.application.dto.UserDTO;
+import com.user.application.dto.request.UserDTO;
 
 import java.text.ParseException;
 
@@ -16,8 +16,8 @@ public class UserDTOHelper {
                 .cpf("99999999999")
                 .gender("feminine")
                 .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"))
-                .addressDTO(AddressDTOHelper.defaultAddressDTO().build())
-                .profilesDTO(UserProfilesDTOHelper.defaultUserProfilesDTO().build())
-                .preferencesDTO(UserPreferencesDTOHelper.defaultUserPreferencesDTO().build());
+                .address(AddressDTOHelper.defaultAddressDTO().build())
+                .userProfiles(UserProfilesDTOHelper.defaultUserProfilesDTO().build())
+                .userPreferences(UserPreferencesDTOHelper.defaultUserPreferencesDTO().build());
     }
 }

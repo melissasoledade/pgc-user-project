@@ -1,6 +1,6 @@
 package com.user.application.controllers;
 
-import com.user.application.dto.UserDTO;
+import com.user.application.dto.request.UserDTO;
 import com.user.application.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

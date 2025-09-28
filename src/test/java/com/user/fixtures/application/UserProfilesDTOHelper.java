@@ -1,6 +1,6 @@
 package com.user.fixtures.application;
 
-import com.user.application.dto.UserProfilesDTO;
+import com.user.application.dto.request.UserProfilesDTO;
 
 public class UserProfilesDTOHelper {
 

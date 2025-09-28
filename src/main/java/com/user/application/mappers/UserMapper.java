@@ -1,6 +1,6 @@
 package com.user.application.mappers;
 
-import com.user.application.dto.UserDTO;
+import com.user.application.dto.request.UserDTO;
 import com.user.domain.entities.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -16,9 +16,9 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(source = "addressDTO", target = "address")
-    @Mapping(source = "profilesDTO", target = "userProfiles")
-    @Mapping(source = "preferencesDTO", target = "userPreferences")
+    @Mapping(source = "address", target = "address")
+    @Mapping(source = "userProfiles", target = "userProfiles")
+    @Mapping(source = "userPreferences", target = "userPreferences")
     User toUser(UserDTO userDTO);
 
     @InheritInverseConfiguration

@@ -1,4 +1,4 @@
-package com.user.application.dto;
+package com.user.application.dto.request;
 
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class UserDTO {
     private String cpf;
     private String gender;
     private Date birthDate;
-    private AddressDTO addressDTO;
-    private UserProfilesDTO profilesDTO;
-    private UserPreferencesDTO preferencesDTO;
+    private AddressDTO address;
+    private UserProfilesDTO userProfiles;
+    private UserPreferencesDTO userPreferences;
 }

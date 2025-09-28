@@ -1,6 +1,6 @@
 package com.user.application.mappers;
 
-import com.user.application.dto.AddressDTO;
+import com.user.application.dto.request.AddressDTO;
 import com.user.domain.entities.Address;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

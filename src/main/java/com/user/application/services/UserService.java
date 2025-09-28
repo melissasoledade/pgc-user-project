@@ -1,6 +1,6 @@
 package com.user.application.services;
 
-import com.user.application.dto.UserDTO;
+import com.user.application.dto.request.UserDTO;
 import com.user.application.mappers.UserMapper;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
