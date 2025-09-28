@@ -3,7 +3,10 @@ package com.user.application.mappers;
 import com.user.application.dto.UserDTO;
 import com.user.domain.entities.User;
 import com.user.fixtures.application.UserDTOHelper;
+import com.user.fixtures.domain.AddressHelper;
 import com.user.fixtures.domain.UserHelper;
+import com.user.fixtures.domain.UserPreferencesHelper;
+import com.user.fixtures.domain.UserProfilesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -34,7 +37,18 @@ class UserMapperTest {
     @Test
     void shouldMapUserDTOToUserEntity() throws ParseException {
         // given
-        final User user = UserHelper.defaultUser().build();
+        final User user = UserHelper.defaultUser()
+                .id(null)
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
         final UserDTO userDTO = UserDTOHelper.defaultUserDTO().build();
 
         // when
@@ -72,7 +86,18 @@ class UserMapperTest {
     @Test
     void shouldMapUserEntityToUserDTO() throws ParseException {
         // given
-        final User user = UserHelper.defaultUser().build();
+        final User user = UserHelper.defaultUser()
+                .id(null)
+                .address(AddressHelper.defaultAddress()
+                        .addressId(null)
+                        .build())
+                .userProfiles(UserProfilesHelper.defaultUserProfiles()
+                        .userProfilesId(null)
+                        .build())
+                .userPreferences(UserPreferencesHelper.defaultUserPreferences()
+                        .userPreferencesId(null)
+                        .build())
+                .build();
         final UserDTO userDTO = UserDTOHelper.defaultUserDTO().build();
 
         // when
