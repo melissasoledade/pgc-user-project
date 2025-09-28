@@ -1,4 +1,4 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
 import com.user.application.dto.request.AddressDTO;
 import com.user.domain.entities.Address;

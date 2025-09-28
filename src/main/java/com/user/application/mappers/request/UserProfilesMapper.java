@@ -1,4 +1,4 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
 import com.user.application.dto.request.UserProfilesDTO;
 import com.user.domain.entities.UserProfiles;

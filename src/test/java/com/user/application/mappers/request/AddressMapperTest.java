@@ -1,8 +1,8 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
 import com.user.application.dto.request.AddressDTO;
 import com.user.domain.entities.Address;
-import com.user.fixtures.application.AddressDTOHelper;
+import com.user.fixtures.application.request.AddressDTOHelper;
 import com.user.fixtures.domain.AddressHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
 import com.user.application.dto.request.UserPreferencesDTO;
 import com.user.domain.entities.UserPreferences;

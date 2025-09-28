@@ -1,4 +1,4 @@
-package com.user.fixtures.application;
+package com.user.fixtures.application.request;
 
 import com.user.application.dto.request.UserPreferencesDTO;
 
