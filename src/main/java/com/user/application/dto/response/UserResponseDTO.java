@@ -9,6 +9,7 @@ import java.util.Date;
 @Builder
 public class UserResponseDTO {
 
+    private Long userId;
     private String name;
     private String email;
     private String phoneNumber;
