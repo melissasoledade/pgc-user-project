@@ -51,15 +51,15 @@ public class User {
     private Date birthDate;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_preferences_id")
+    @JoinColumn(name = "user_preferences_id", nullable = false)
     private UserPreferences userPreferences;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_profiles_id")
+    @JoinColumn(name = "user_profiles_id", nullable = false)
     private UserProfiles userProfiles;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @CreationTimestamp

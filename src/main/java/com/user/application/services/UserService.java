@@ -20,14 +20,14 @@ public class UserService {
     private final BaseUserRepository repository;
 
     public Optional<UserResponseDTO> getUser(Long id) {
-        Optional<User> user = this.repository.findUserById(id);
+        final Optional<User> user = this.repository.findUserById(id);
 
         return user.map(this.userResponseMapper::fromUser);
     }
 
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
-        User user = this.userMapper.toUser(userDTO);
-        User savedUser = this.repository.saveUser(user);
+        final User user = this.userMapper.toUser(userDTO);
+        final User savedUser = this.repository.saveUser(user);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }

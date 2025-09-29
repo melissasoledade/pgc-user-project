@@ -5,10 +5,18 @@ import com.user.application.dto.response.UserResponseDTO;
 import com.user.application.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+
+import static java.util.Optional.empty;
 
 @RestController
 @Slf4j
@@ -25,7 +33,7 @@ public class RestUserController {
         log.info("User {} with id: {}", response, id);
 
         if (response.isEmpty()) {
-            return ResponseEntity.ok("No user found with id");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(empty());
         }
 
         return ResponseEntity.ok(response);
@@ -38,10 +46,10 @@ public class RestUserController {
         log.info("User created {}", response);
 
         if (response.isEmpty()) {
-            return ResponseEntity.ok("User not created");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        return ResponseEntity.ok(response.get());
+        return ResponseEntity.status(HttpStatus.CREATED).body(empty());
     }
 
 }
