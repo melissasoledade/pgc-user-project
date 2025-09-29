@@ -1,8 +1,8 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
-import com.user.application.dto.UserProfilesDTO;
+import com.user.application.dto.request.UserProfilesDTO;
 import com.user.domain.entities.UserProfiles;
-import com.user.fixtures.application.UserProfilesDTOHelper;
+import com.user.fixtures.application.request.UserProfilesDTOHelper;
 import com.user.fixtures.domain.UserProfilesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

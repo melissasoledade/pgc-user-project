@@ -1,6 +1,6 @@
-package com.user.fixtures.application;
+package com.user.fixtures.application.request;
 
-import com.user.application.dto.AddressDTO;
+import com.user.application.dto.request.AddressDTO;
 
 import java.math.BigDecimal;
 

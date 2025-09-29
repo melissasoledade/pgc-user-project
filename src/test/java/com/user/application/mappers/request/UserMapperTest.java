@@ -1,8 +1,8 @@
-package com.user.application.mappers;
+package com.user.application.mappers.request;
 
-import com.user.application.dto.UserDTO;
+import com.user.application.dto.request.UserDTO;
 import com.user.domain.entities.User;
-import com.user.fixtures.application.UserDTOHelper;
+import com.user.fixtures.application.request.UserDTOHelper;
 import com.user.fixtures.domain.AddressHelper;
 import com.user.fixtures.domain.UserHelper;
 import com.user.fixtures.domain.UserPreferencesHelper;
@@ -111,20 +111,20 @@ class UserMapperTest {
         assertEquals(userDTO.getEmail(), result.getEmail());
         assertEquals(userDTO.getBirthDate(), result.getBirthDate());
 
-        assertEquals(userDTO.getProfilesDTO().getProfileCode(),
-                result.getProfilesDTO().getProfileCode());
-        assertEquals(userDTO.getProfilesDTO().getProfileName(),
-                result.getProfilesDTO().getProfileName());
+        assertEquals(userDTO.getUserProfiles().getProfileCode(),
+                result.getUserProfiles().getProfileCode());
+        assertEquals(userDTO.getUserProfiles().getProfileName(),
+                result.getUserProfiles().getProfileName());
 
-        assertEquals(userDTO.getAddressDTO().getAddressName(),
-                result.getAddressDTO().getAddressName());
-        assertEquals(userDTO.getAddressDTO().getNumber(),
-                result.getAddressDTO().getNumber());
+        assertEquals(userDTO.getAddress().getAddressName(),
+                result.getAddress().getAddressName());
+        assertEquals(userDTO.getAddress().getNumber(),
+                result.getAddress().getNumber());
 
-        assertEquals(userDTO.getPreferencesDTO().getTimeZone(),
-                result.getPreferencesDTO().getTimeZone());
-        assertEquals(userDTO.getPreferencesDTO().getLanguage(),
-                result.getPreferencesDTO().getLanguage());
+        assertEquals(userDTO.getUserPreferences().getTimeZone(),
+                result.getUserPreferences().getTimeZone());
+        assertEquals(userDTO.getUserPreferences().getLanguage(),
+                result.getUserPreferences().getLanguage());
     }
 
 }

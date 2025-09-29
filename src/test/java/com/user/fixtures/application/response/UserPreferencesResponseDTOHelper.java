@@ -1,13 +1,14 @@
-package com.user.fixtures.application;
+package com.user.fixtures.application.response;
 
-import com.user.application.dto.UserPreferencesDTO;
+import com.user.application.dto.response.UserPreferencesResponseDTO;
 
 import java.util.TimeZone;
 
-public class UserPreferencesDTOHelper {
+public class UserPreferencesResponseDTOHelper {
 
-    public static UserPreferencesDTO.UserPreferencesDTOBuilder defaultUserPreferencesDTO() {
-        return UserPreferencesDTO.builder()
+    public static UserPreferencesResponseDTO.UserPreferencesResponseDTOBuilder
+    defaultUserPreferencesResponseDTO() {
+        return UserPreferencesResponseDTO.builder()
                 .whatsAppOptIn(Boolean.TRUE)
                 .whatsAppPromotional(Boolean.FALSE)
                 .emailOptIn(Boolean.FALSE)
