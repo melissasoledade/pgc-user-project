@@ -46,10 +46,10 @@ public class RestUserController {
         log.info("User created {}", response);
 
         if (response.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(empty());
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(empty());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 }
