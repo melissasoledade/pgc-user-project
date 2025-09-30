@@ -2,6 +2,7 @@ package com.user.application.services;
 
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.mappers.UserUpdatedMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
 import com.user.domain.entities.User;
@@ -17,6 +18,7 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final UserResponseMapper userResponseMapper;
+    private final UserUpdatedMapper userUpdatedMapper;
     private final BaseUserRepository repository;
 
     public Optional<UserResponseDTO> getUser(Long id) {
@@ -32,4 +34,17 @@ public class UserService {
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
 
+    public Optional<UserResponseDTO> updateUser(Long id, UserDTO userDTO) {
+        final Optional<User> user = this.repository.findUserById(id);
+
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+
+        final User updatedUser = user.get();
+        this.userUpdatedMapper.updateUserFromDTO(userDTO, updatedUser);
+        final User savedUser = this.repository.saveUser(updatedUser);
+
+        return Optional.of(this.userResponseMapper.fromUser(savedUser));
+    }
 }
