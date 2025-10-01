@@ -10,6 +10,7 @@ import com.user.domain.repositories.BaseUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,14 @@ public class UserService {
         final Optional<User> user = this.repository.findUserById(id);
 
         return user.map(this.userResponseMapper::fromUser);
+    }
+
+    public List<UserResponseDTO> getUsers(List<Long> ids) {
+        final List<User> users = this.repository.findUsersByIds(ids);
+
+        return users.stream()
+                .map(this.userResponseMapper::fromUser)
+                .toList();
     }
 
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
@@ -46,5 +55,9 @@ public class UserService {
         final User savedUser = this.repository.saveUser(updatedUser);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
+    }
+
+    public void deleteUser(Long id) {
+        this.repository.deleteUserById(id);
     }
 }
