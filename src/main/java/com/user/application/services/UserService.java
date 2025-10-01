@@ -2,6 +2,7 @@ package com.user.application.services;
 
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
@@ -22,10 +23,11 @@ public class UserService {
     private final UserUpdatedMapper userUpdatedMapper;
     private final BaseUserRepository repository;
 
-    public Optional<UserResponseDTO> getUser(Long id) {
+    public UserResponseDTO getUser(Long id) {
         final Optional<User> user = this.repository.findUserById(id);
 
-        return user.map(this.userResponseMapper::fromUser);
+        return user.map(this.userResponseMapper::fromUser)
+                .orElseThrow(UserNotFoundException::new);
     }
 
     public List<UserResponseDTO> getUsers(List<Long> ids) {

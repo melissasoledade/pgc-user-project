@@ -32,12 +32,7 @@ public class RestUserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id) {
-        final Optional<UserResponseDTO> response = userService.getUser(id);
-
-        if (response.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(empty());
-        }
-
+        final UserResponseDTO response = userService.getUser(id);
         log.info("Getting User with id {}", id);
         return ResponseEntity.ok(response);
     }
