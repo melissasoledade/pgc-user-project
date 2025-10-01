@@ -2,6 +2,7 @@ package com.user.application.exceptionhandler;
 
 import com.user.application.dto.exception.ExceptionDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
+import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +25,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler({ UserNotFoundException.class, UsersNotFoundException.class})
     public ResponseEntity<ExceptionDTO> notFoundException(RuntimeException ex) {
         final ExceptionDTO exceptionDTO = ExceptionDTO.builder()
                 .timestamp(LocalDateTime.now())

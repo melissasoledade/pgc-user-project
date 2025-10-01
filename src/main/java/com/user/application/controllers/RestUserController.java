@@ -40,11 +40,6 @@ public class RestUserController {
     @GetMapping("/list")
     public ResponseEntity<?> getUsers(@RequestParam List<Long> ids) {
         final List<UserResponseDTO> response = userService.getUsers(ids);
-
-        if (response.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(empty());
-        }
-
         log.info("Getting users with ids {}", ids);
         return ResponseEntity.ok(response);
     }
