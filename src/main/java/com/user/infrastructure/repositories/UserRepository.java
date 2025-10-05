@@ -30,8 +30,15 @@ public class UserRepository implements BaseUserRepository {
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public Optional<User> deleteUserById(Long id) {
+        Optional<User> user = this.repository.findById(id);
+
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+
         this.repository.deleteById(id);
+        return user;
     }
 
     @Override
