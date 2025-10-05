@@ -70,10 +70,9 @@ public class RestUserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        this.userService.deleteUser(id);
-
+        UserResponseDTO response = this.userService.deleteUser(id);
         log.info("User deleted with id {}", id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

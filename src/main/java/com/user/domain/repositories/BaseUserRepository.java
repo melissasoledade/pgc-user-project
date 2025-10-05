@@ -13,7 +13,7 @@ public interface BaseUserRepository {
 
     List<User> findUsersByIds(List<Long> userIds);
 
-    void deleteUserById(Long id);
+    Optional<User> deleteUserById(Long id);
 
     void deleteAll();
 }

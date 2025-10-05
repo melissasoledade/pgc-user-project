@@ -64,7 +64,9 @@ public class UserService {
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
 
-    public void deleteUser(Long id) {
-        this.repository.deleteUserById(id);
+    public UserResponseDTO deleteUser(Long id) {
+        final Optional<User> user = this.repository.deleteUserById(id);
+        return user.map(this.userResponseMapper::fromUser)
+                .orElseThrow(UserNotFoundException::new);
     }
 }
