@@ -18,7 +18,7 @@ public class UserProfilesService {
     private final UserProfilesResponseMapper userProfilesResponseMapper;
 
     public UserProfilesResponseDTO getUserProfiles(Long id) {
-        Optional<UserProfiles> userProfiles = this.repository.findUserProfilesByUserId(id);
+        final Optional<UserProfiles> userProfiles = this.repository.findUserProfilesByUserId(id);
 
         return userProfiles.map(this.userProfilesResponseMapper::fromUserProfiles)
                 .orElseThrow(UserNotFoundException::new);
