@@ -22,7 +22,7 @@ public class RestUserPreferencesController {
     public ResponseEntity<?> getUserPreferences(@PathVariable Long id) {
         final UserPreferencesResponseDTO response =
                 this.userPreferencesService.getUserPreferences(id);
-        log.info("Getting user profiles with userId {}", id);
+        log.info("Getting user preferences with userId {}", id);
         return ResponseEntity.ok(response);
     }
 }
