@@ -38,7 +38,7 @@ class RestUserPreferencesControllerIT {
     private BaseUserRepository repository;
 
     @Test
-    void shouldGetUserByIdWithSuccess() throws Exception {
+    void shouldGetUserPreferencesByIdWithSuccess() throws Exception {
         // given
         final User user = UserHelper.defaultUser()
                 .id(null)
