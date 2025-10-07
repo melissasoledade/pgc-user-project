@@ -35,4 +35,20 @@ Start docker containers:
 docker-compose up
 ```
 
+## Running
+
+To build the application:
+```
+./gradlew clean build
+```
+
+To run the tests and check the statuses:
+```
+./gradlew clean test
+```
+
+To run the api locally (build the application first):
+```
+./gradlew bootRun
+```
 
