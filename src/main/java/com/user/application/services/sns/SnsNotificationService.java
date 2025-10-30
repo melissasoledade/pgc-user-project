@@ -13,6 +13,6 @@ public class SnsNotificationService {
     }
 
     public void publishMessage(String topicName, String message) {
-        template.sendNotification(topicName, message, "Subject: New Notification");
+        template.sendNotification(topicName, message);
     }
 }

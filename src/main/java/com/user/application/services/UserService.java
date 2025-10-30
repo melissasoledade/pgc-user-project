@@ -7,6 +7,7 @@ import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
+import com.user.application.services.sns.UserNotificationService;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UserService {
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
     private final BaseUserRepository repository;
+    private final UserNotificationService notificationService;
 
     public UserResponseDTO getUser(Long id) {
         final Optional<User> user = this.repository.findUserById(id);
@@ -46,6 +48,8 @@ public class UserService {
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
         final User savedUser = this.repository.saveUser(user);
+
+        notificationService.publishMessage(savedUser.getId().toString());
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }

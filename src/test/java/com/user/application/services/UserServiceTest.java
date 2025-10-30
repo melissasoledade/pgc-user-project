@@ -7,6 +7,7 @@ import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
+import com.user.application.services.sns.UserNotificationService;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
 import com.user.fixtures.application.request.UserDTOHelper;
@@ -46,6 +47,9 @@ class UserServiceTest {
 
     @Mock
     private BaseUserRepository repository;
+
+    @Mock
+    private UserNotificationService notificationService;
 
     @InjectMocks
     private UserService service;
@@ -151,6 +155,8 @@ class UserServiceTest {
         assertEquals(1L, result.get().getUserId());
         assertEquals("Ana da Silva", result.get().getName());
 
+        verify(this.notificationService, times(1))
+                .publishMessage(savedUser.getId().toString());
         verify(this.userMapper, times(1)).toUser(userDTO);
         verify(this.repository, times(1)).saveUser(user);
         verify(this.userResponseMapper, times(1)).fromUser(savedUser);
