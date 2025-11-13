@@ -1,4 +1,4 @@
-package com.user.application.services.sns;
+package com.user.application.services.publisher;
 
 import io.awspring.cloud.sns.core.SnsTemplate;
 import org.springframework.stereotype.Service;

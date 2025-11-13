@@ -1,15 +1,18 @@
 package com.user.application.services;
 
+import com.user.application.dto.event.UserEvent;
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;
+import com.user.application.mappers.event.UserEventMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
-import com.user.application.services.sns.UserNotificationService;
+import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
+import com.user.fixtures.application.event.UserEventHelper;
 import com.user.fixtures.application.request.UserDTOHelper;
 import com.user.fixtures.application.response.UserResponseDTOHelper;
 import com.user.fixtures.domain.UserHelper;
@@ -49,7 +52,10 @@ class UserServiceTest {
     private BaseUserRepository repository;
 
     @Mock
-    private UserNotificationService notificationService;
+    private UserEventPublisher notificationService;
+
+    @Mock
+    private UserEventMapper userEventMapper;
 
     @InjectMocks
     private UserService service;
@@ -142,8 +148,10 @@ class UserServiceTest {
                 .defaultUserResponseDTO()
                 .userId(1L)
                 .build();
+        final UserEvent userEvent = UserEventHelper.defaultUserEvent().build();
 
         when(this.userMapper.toUser(userDTO)).thenReturn(user);
+        when(this.userEventMapper.fromUser(savedUser)).thenReturn(userEvent);
         when(this.repository.saveUser(user)).thenReturn(savedUser);
         when(this.userResponseMapper.fromUser(savedUser)).thenReturn(userResponseDTO);
 
@@ -156,7 +164,7 @@ class UserServiceTest {
         assertEquals("Ana da Silva", result.get().getName());
 
         verify(this.notificationService, times(1))
-                .publishMessage(savedUser.getId().toString());
+                .publishMessage(userEvent);
         verify(this.userMapper, times(1)).toUser(userDTO);
         verify(this.repository, times(1)).saveUser(user);
         verify(this.userResponseMapper, times(1)).fromUser(savedUser);

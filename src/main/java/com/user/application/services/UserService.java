@@ -1,13 +1,15 @@
 package com.user.application.services;
 
+import com.user.application.dto.event.UserEvent;
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;
+import com.user.application.mappers.event.UserEventMapper;
 import com.user.application.mappers.request.UserMapper;
 import com.user.application.mappers.response.UserResponseMapper;
-import com.user.application.services.sns.UserNotificationService;
+import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +26,8 @@ public class UserService {
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
     private final BaseUserRepository repository;
-    private final UserNotificationService notificationService;
+    private final UserEventPublisher publisher;
+    private final UserEventMapper userEventMapper;
 
     public UserResponseDTO getUser(Long id) {
         final Optional<User> user = this.repository.findUserById(id);
@@ -48,8 +51,9 @@ public class UserService {
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
         final User savedUser = this.repository.saveUser(user);
+        final UserEvent userEvent = this.userEventMapper.fromUser(savedUser);
 
-        notificationService.publishMessage(savedUser.getId().toString());
+        publisher.publishMessage(userEvent);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
