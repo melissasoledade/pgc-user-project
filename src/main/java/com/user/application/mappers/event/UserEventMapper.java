@@ -8,6 +8,7 @@ import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Builder
 @AllArgsConstructor
@@ -20,6 +21,7 @@ public class UserEventMapper {
         final UserDataEvent eventData= userDataEventMapper.fromUser(user);
         return UserEvent.builder()
                 .eventData(eventData)
+                .timestamp(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                 .referenceDate(LocalDateTime.now())
                 .build();
     }

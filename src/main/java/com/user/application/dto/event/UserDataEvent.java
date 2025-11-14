@@ -1,6 +1,5 @@
 package com.user.application.dto.event;
 
-import com.user.domain.entities.UserPreferences;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,5 +18,5 @@ public class UserDataEvent {
     private Date birthDate;
     private UserAddressEvent address;
     private UserProfilesEvent userProfiles;
-    private UserPreferences userPreferences;
+    private UserPreferencesEvent userPreferences;
 }

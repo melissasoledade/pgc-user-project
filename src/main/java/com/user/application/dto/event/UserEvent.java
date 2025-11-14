@@ -1,5 +1,6 @@
 package com.user.application.dto.event;
 
+import com.user.application.dto.EventType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 public class UserEvent {
 
-    private String eventName;
+    private EventType eventType;
     private Long timestamp;
     private LocalDateTime referenceDate;
     private String origin;
