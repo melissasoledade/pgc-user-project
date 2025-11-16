@@ -1,5 +1,6 @@
 package com.user.application.mappers.event;
 
+import com.user.application.dto.EventType;
 import com.user.application.dto.event.UserEvent;
 import com.user.domain.entities.User;
 import com.user.fixtures.application.event.UserEventHelper;
@@ -41,7 +42,7 @@ class UserEventMapperTest {
         when(userDataEventMapper.fromUser(user)).thenReturn(event.getEventData());
 
         // when
-        final UserEvent result = this.mapper.fromUser(user);
+        final UserEvent result = this.mapper.fromUser(user, EventType.CREATION);
 
         // then
         assertEquals(event.getEventData().getUserId(), result.getEventData().getUserId());
