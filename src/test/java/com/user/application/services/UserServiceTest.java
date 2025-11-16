@@ -1,5 +1,6 @@
 package com.user.application.services;
 
+import com.user.application.dto.EventType;
 import com.user.application.dto.event.UserEvent;
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
@@ -151,7 +152,7 @@ class UserServiceTest {
         final UserEvent userEvent = UserEventHelper.defaultUserEvent().build();
 
         when(this.userMapper.toUser(userDTO)).thenReturn(user);
-        when(this.userEventMapper.fromUser(savedUser)).thenReturn(userEvent);
+        when(this.userEventMapper.fromUser(savedUser, EventType.CREATION)).thenReturn(userEvent);
         when(this.repository.saveUser(user)).thenReturn(savedUser);
         when(this.userResponseMapper.fromUser(savedUser)).thenReturn(userResponseDTO);
 

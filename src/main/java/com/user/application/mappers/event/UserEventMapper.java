@@ -1,5 +1,6 @@
 package com.user.application.mappers.event;
 
+import com.user.application.dto.EventType;
 import com.user.application.dto.event.UserDataEvent;
 import com.user.application.dto.event.UserEvent;
 import com.user.domain.entities.User;
@@ -17,9 +18,10 @@ public class UserEventMapper {
 
     private final UserDataEventMapper userDataEventMapper;
 
-    public UserEvent fromUser(User user) {
+    public UserEvent fromUser(User user, EventType eventType) {
         final UserDataEvent eventData= userDataEventMapper.fromUser(user);
         return UserEvent.builder()
+                .eventType(eventType)
                 .eventData(eventData)
                 .timestamp(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                 .referenceDate(LocalDateTime.now())

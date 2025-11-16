@@ -1,5 +1,6 @@
 package com.user.application.services;
 
+import com.user.application.dto.EventType;
 import com.user.application.dto.event.UserEvent;
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
@@ -29,6 +30,16 @@ public class UserService {
     private final UserEventPublisher publisher;
     private final UserEventMapper userEventMapper;
 
+    private void publishUserEvent(User user, EventType eventType) {
+        final UserEvent userEvent = this.userEventMapper.fromUser(user, eventType);
+        this.publisher.publishMessage(userEvent);
+    }
+
+    private User updateUserAndSave(User user, UserDTO userDTO) {
+        this.userUpdatedMapper.updateUserFromDTO(userDTO, user);
+        return this.repository.saveUser(user);
+    }
+
     public UserResponseDTO getUser(Long id) {
         final Optional<User> user = this.repository.findUserById(id);
 
@@ -51,9 +62,7 @@ public class UserService {
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
         final User savedUser = this.repository.saveUser(user);
-        final UserEvent userEvent = this.userEventMapper.fromUser(savedUser);
-
-        publisher.publishMessage(userEvent);
+        publishUserEvent(savedUser, EventType.CREATION);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
@@ -65,9 +74,8 @@ public class UserService {
             return Optional.empty();
         }
 
-        final User updatedUser = user.get();
-        this.userUpdatedMapper.updateUserFromDTO(userDTO, updatedUser);
-        final User savedUser = this.repository.saveUser(updatedUser);
+        final User savedUser = updateUserAndSave(user.get(), userDTO);
+        publishUserEvent(savedUser, EventType.UPDATE);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
