@@ -17,6 +17,7 @@ public class UserResponseDTOHelper {
                 .cpf("99999999999")
                 .gender("feminine")
                 .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"))
+                .origin("app")
                 .userProfiles(UserProfilesResponseDTOHelper.defaultUserProfilesResponseDTO().build())
                 .userPreferences(UserPreferencesResponseDTOHelper.defaultUserPreferencesResponseDTO().build())
                 .address(AddressResponseDTOHelper.defaultAddressResponseDTO().build());

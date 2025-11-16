@@ -19,7 +19,7 @@ public class UserEventMapper {
     private final UserDataEventMapper userDataEventMapper;
 
     public UserEvent fromUser(User user, EventType eventType) {
-        final UserDataEvent eventData= userDataEventMapper.fromUser(user);
+        final UserDataEvent eventData = userDataEventMapper.fromUser(user);
         return UserEvent.builder()
                 .eventType(eventType)
                 .eventData(eventData)

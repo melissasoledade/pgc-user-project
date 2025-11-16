@@ -16,6 +16,7 @@ public class UserDataEvent {
     private String cpf;
     private String gender;
     private Date birthDate;
+    private String origin;
     private UserAddressEvent address;
     private UserProfilesEvent userProfiles;
     private UserPreferencesEvent userPreferences;
