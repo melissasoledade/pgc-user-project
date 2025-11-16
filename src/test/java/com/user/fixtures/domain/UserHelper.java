@@ -16,6 +16,7 @@ public class UserHelper {
                 .email("ana@gmail.com")
                 .cpf("99999999999")
                 .gender("feminine")
+                .origin("app")
                 .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"));
     }
 }

@@ -55,6 +55,7 @@ class UserResponseMapperTest {
         assertEquals(userResponseDTO.getBirthDate(), result.getBirthDate());
         assertEquals(userResponseDTO.getCpf(),
                 result.getCpf());
+        assertEquals(userResponseDTO.getOrigin(), result.getOrigin());
     }
 
 }

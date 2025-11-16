@@ -16,6 +16,7 @@ public class UserResponseDTO {
     private String cpf;
     private String gender;
     private Date birthDate;
+    private String origin;
     private AddressResponseDTO address;
     private UserProfilesResponseDTO userProfiles;
     private UserPreferencesResponseDTO userPreferences;

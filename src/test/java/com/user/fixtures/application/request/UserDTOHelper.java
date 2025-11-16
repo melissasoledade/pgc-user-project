@@ -16,6 +16,7 @@ public class UserDTOHelper {
                 .cpf("99999999999")
                 .gender("feminine")
                 .birthDate(parseDateFromString("yyyy-MM-dd","1999-01-01"))
+                .origin("app")
                 .address(AddressDTOHelper.defaultAddressDTO().build())
                 .userProfiles(UserProfilesDTOHelper.defaultUserProfilesDTO().build())
                 .userPreferences(UserPreferencesDTOHelper.defaultUserPreferencesDTO().build());

@@ -15,6 +15,7 @@ public class UserDTO {
     private String cpf;
     private String gender;
     private Date birthDate;
+    private String origin;
     private AddressDTO address;
     private UserProfilesDTO userProfiles;
     private UserPreferencesDTO userPreferences;

@@ -61,6 +61,7 @@ class UserMapperTest {
         assertEquals(user.getPhoneNumber(), result.getPhoneNumber());
         assertEquals(user.getEmail(), result.getEmail());
         assertEquals(user.getBirthDate(), result.getBirthDate());
+        assertEquals(user.getOrigin(), result.getOrigin());
 
         assertEquals(user.getUserProfiles().getProfileCode(),
                 result.getUserProfiles().getProfileCode());
@@ -110,6 +111,7 @@ class UserMapperTest {
         assertEquals(userDTO.getPhoneNumber(), result.getPhoneNumber());
         assertEquals(userDTO.getEmail(), result.getEmail());
         assertEquals(userDTO.getBirthDate(), result.getBirthDate());
+        assertEquals(userDTO.getOrigin(), result.getOrigin());
 
         assertEquals(userDTO.getUserProfiles().getProfileCode(),
                 result.getUserProfiles().getProfileCode());

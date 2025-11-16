@@ -50,6 +50,9 @@ public class User {
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
 
+    @Column
+    private String origin;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_preferences_id", nullable = false)
     private UserPreferences userPreferences;
