@@ -2,6 +2,7 @@ package com.user.application.controllers;
 
 import com.user.application.dto.response.UserPreferencesResponseDTO;
 import com.user.application.services.UserPreferencesService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class RestUserPreferencesController {
 
     private final UserPreferencesService userPreferencesService;
 
+    @Operation(summary = "Get user preferences by user id", description = "Fetch user preferences by the given user id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserPreferences(@PathVariable Long id) {
         final UserPreferencesResponseDTO response =

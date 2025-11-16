@@ -3,6 +3,7 @@ package com.user.application.controllers;
 import com.user.application.dto.request.UserDTO;
 import com.user.application.dto.response.UserResponseDTO;
 import com.user.application.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class RestUserController {
 
     private final UserService userService;
 
+    @Operation(summary = "Get a user by id", description = "Fetches a user using the given id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id) {
         final UserResponseDTO response = userService.getUser(id);
@@ -37,6 +39,7 @@ public class RestUserController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Get a list of users by ids", description = "Fetches a list of users using the list of ids")
     @GetMapping("/list")
     public ResponseEntity<?> getUsers(@RequestParam List<Long> ids) {
         final List<UserResponseDTO> response = userService.getUsers(ids);
@@ -44,6 +47,7 @@ public class RestUserController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Create a new user", description = "Create a new user with the UserDTO")
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
         Optional<UserResponseDTO> response = this.userService.createUser(userDTO);
@@ -56,6 +60,7 @@ public class RestUserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Update a user by id", description = "Update a user using the given id")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         Optional<UserResponseDTO> response = this.userService.updateUser(id, userDTO);
@@ -68,6 +73,7 @@ public class RestUserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Delete a user by id", description = "Delete a user using the given id")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         UserResponseDTO response = this.userService.deleteUser(id);

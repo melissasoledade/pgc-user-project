@@ -38,3 +38,8 @@ out/
 
 ### env vars ###
 .env
+
+### Logs ###
+logs/
+*.log
+

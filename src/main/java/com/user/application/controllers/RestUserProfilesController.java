@@ -2,6 +2,7 @@ package com.user.application.controllers;
 
 import com.user.application.dto.response.UserProfilesResponseDTO;
 import com.user.application.services.UserProfilesService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class RestUserProfilesController {
 
     private final UserProfilesService userProfilesService;
 
+    @Operation(summary = "Get user profiles by user id", description = "Fetch user profiles by the given user id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserProfiles(@PathVariable Long id) {
         final UserProfilesResponseDTO response = userProfilesService.getUserProfiles(id);
