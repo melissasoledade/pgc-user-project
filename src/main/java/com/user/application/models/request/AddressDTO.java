@@ -1,4 +1,4 @@
-package com.user.application.dto.request;
+package com.user.application.models.request;
 
 import lombok.Builder;
 import lombok.Data;

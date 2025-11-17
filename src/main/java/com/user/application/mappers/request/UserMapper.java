@@ -1,6 +1,6 @@
 package com.user.application.mappers.request;
 
-import com.user.application.dto.request.UserDTO;
+import com.user.application.models.request.UserDTO;
 import com.user.domain.entities.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

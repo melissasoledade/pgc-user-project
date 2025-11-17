@@ -1,8 +1,8 @@
 package com.user.application.mappers.event;
 
-import com.user.application.dto.EventType;
-import com.user.application.dto.event.UserDataEvent;
-import com.user.application.dto.event.UserEvent;
+import com.user.application.models.EventType;
+import com.user.application.models.event.UserDataEvent;
+import com.user.application.models.event.UserEvent;
 import com.user.domain.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

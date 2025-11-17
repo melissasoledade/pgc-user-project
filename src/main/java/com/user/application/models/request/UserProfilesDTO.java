@@ -1,11 +1,11 @@
-package com.user.application.dto.event;
+package com.user.application.models.request;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class UserProfilesEvent {
+public class UserProfilesDTO {
 
     private Long profileCode;
     private String profileName;

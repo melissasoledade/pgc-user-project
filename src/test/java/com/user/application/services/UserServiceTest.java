@@ -1,9 +1,9 @@
 package com.user.application.services;
 
-import com.user.application.dto.EventType;
-import com.user.application.dto.event.UserEvent;
-import com.user.application.dto.request.UserDTO;
-import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.models.EventType;
+import com.user.application.models.event.UserEvent;
+import com.user.application.models.request.UserDTO;
+import com.user.application.models.response.UserResponseDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.application.mappers.UserUpdatedMapper;

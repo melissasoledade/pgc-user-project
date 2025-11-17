@@ -1,9 +1,9 @@
-package com.user.application.dto.response;
+package com.user.application.models.response;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -15,7 +15,7 @@ public class UserResponseDTO {
     private String phoneNumber;
     private String cpf;
     private String gender;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String origin;
     private AddressResponseDTO address;
     private UserProfilesResponseDTO userProfiles;

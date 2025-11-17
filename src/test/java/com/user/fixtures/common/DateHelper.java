@@ -3,7 +3,8 @@ package com.user.fixtures.common;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DateHelper {
 
@@ -11,7 +12,8 @@ public class DateHelper {
         return new SimpleDateFormat(pattern);
     }
 
-    public static Date parseDateFromString(String pattern, String textDate) throws ParseException {
-        return dateFormat(pattern).parse(textDate);
+    public static LocalDate parseDateFromString(String pattern, String textDate) throws ParseException {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDate.parse(textDate, formatter);
     }
 }

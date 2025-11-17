@@ -1,4 +1,4 @@
-package com.user.application.dto.response;
+package com.user.application.models.request;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.util.TimeZone;
 
 @Data
 @Builder
-public class UserPreferencesResponseDTO {
+public class UserPreferencesDTO {
 
     private Boolean whatsAppOptIn;
     private Boolean emailOptIn;

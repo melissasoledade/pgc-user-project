@@ -1,4 +1,4 @@
-package com.user.application.dto.response;
+package com.user.application.models.event;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
-public class AddressResponseDTO {
+public class UserAddressEvent {
 
     private String addressName;
     private String number;

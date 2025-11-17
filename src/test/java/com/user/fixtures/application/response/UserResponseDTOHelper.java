@@ -1,6 +1,6 @@
 package com.user.fixtures.application.response;
 
-import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.models.response.UserResponseDTO;
 
 import java.text.ParseException;
 

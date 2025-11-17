@@ -1,6 +1,6 @@
 package com.user.application.mappers.event;
 
-import com.user.application.dto.event.UserProfilesEvent;
+import com.user.application.models.event.UserProfilesEvent;
 import com.user.domain.entities.UserProfiles;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

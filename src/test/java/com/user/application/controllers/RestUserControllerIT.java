@@ -1,7 +1,7 @@
 package com.user.application.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.user.application.dto.request.UserDTO;
+import com.user.application.models.request.UserDTO;
 import com.user.application.services.UserService;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;

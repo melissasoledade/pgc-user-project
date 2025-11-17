@@ -1,6 +1,6 @@
 package com.user.application.mappers.request;
 
-import com.user.application.dto.request.AddressDTO;
+import com.user.application.models.request.AddressDTO;
 import com.user.domain.entities.Address;
 import com.user.fixtures.application.request.AddressDTOHelper;
 import com.user.fixtures.domain.AddressHelper;

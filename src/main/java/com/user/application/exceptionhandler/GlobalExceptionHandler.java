@@ -1,6 +1,6 @@
 package com.user.application.exceptionhandler;
 
-import com.user.application.dto.exception.ExceptionDTO;
+import com.user.application.models.exception.ExceptionDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import org.springframework.http.HttpStatus;

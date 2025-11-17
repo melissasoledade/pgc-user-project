@@ -1,6 +1,6 @@
 package com.user.application.controllers;
 
-import com.user.application.dto.response.UserProfilesResponseDTO;
+import com.user.application.models.response.UserProfilesResponseDTO;
 import com.user.application.services.UserProfilesService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
