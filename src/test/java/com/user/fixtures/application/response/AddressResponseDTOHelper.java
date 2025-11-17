@@ -1,6 +1,6 @@
 package com.user.fixtures.application.response;
 
-import com.user.application.dto.response.AddressResponseDTO;
+import com.user.application.models.response.AddressResponseDTO;
 
 import java.math.BigDecimal;
 

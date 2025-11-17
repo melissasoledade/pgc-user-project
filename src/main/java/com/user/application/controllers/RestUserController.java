@@ -1,7 +1,7 @@
 package com.user.application.controllers;
 
-import com.user.application.dto.request.UserDTO;
-import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.models.request.UserDTO;
+import com.user.application.models.response.UserResponseDTO;
 import com.user.application.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.user.fixtures.application.event;
 
-import com.user.application.dto.event.UserDataEvent;
+import com.user.application.models.event.UserDataEvent;
 
 import java.text.ParseException;
 

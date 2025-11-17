@@ -1,4 +1,4 @@
-package com.user.application.dto.event;
+package com.user.application.models.event;
 
 import lombok.Builder;
 import lombok.Data;

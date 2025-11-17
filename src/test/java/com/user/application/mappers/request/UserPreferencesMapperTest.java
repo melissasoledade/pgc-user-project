@@ -1,6 +1,6 @@
 package com.user.application.mappers.request;
 
-import com.user.application.dto.request.UserPreferencesDTO;
+import com.user.application.models.request.UserPreferencesDTO;
 import com.user.domain.entities.UserPreferences;
 import com.user.fixtures.application.request.UserPreferencesDTOHelper;
 import com.user.fixtures.domain.UserPreferencesHelper;

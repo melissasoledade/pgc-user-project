@@ -1,6 +1,6 @@
 package com.user.application.mappers.event;
 
-import com.user.application.dto.event.UserDataEvent;
+import com.user.application.models.event.UserDataEvent;
 import com.user.domain.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

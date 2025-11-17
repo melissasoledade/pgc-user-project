@@ -1,6 +1,6 @@
 package com.user.fixtures.application.event;
 
-import com.user.application.dto.event.UserPreferencesEvent;
+import com.user.application.models.event.UserPreferencesEvent;
 
 import java.util.TimeZone;
 

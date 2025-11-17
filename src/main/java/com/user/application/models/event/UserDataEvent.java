@@ -1,9 +1,9 @@
-package com.user.application.dto.event;
+package com.user.application.models.event;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -15,7 +15,7 @@ public class UserDataEvent {
     private String phoneNumber;
     private String cpf;
     private String gender;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String origin;
     private UserAddressEvent address;
     private UserProfilesEvent userProfiles;

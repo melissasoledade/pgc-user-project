@@ -1,6 +1,6 @@
 package com.user.fixtures.application.response;
 
-import com.user.application.dto.response.UserPreferencesResponseDTO;
+import com.user.application.models.response.UserPreferencesResponseDTO;
 
 import java.util.TimeZone;
 

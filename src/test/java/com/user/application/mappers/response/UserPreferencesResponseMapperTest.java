@@ -1,6 +1,6 @@
 package com.user.application.mappers.response;
 
-import com.user.application.dto.response.UserPreferencesResponseDTO;
+import com.user.application.models.response.UserPreferencesResponseDTO;
 import com.user.domain.entities.UserPreferences;
 import com.user.fixtures.application.response.UserPreferencesResponseDTOHelper;
 import com.user.fixtures.domain.UserPreferencesHelper;

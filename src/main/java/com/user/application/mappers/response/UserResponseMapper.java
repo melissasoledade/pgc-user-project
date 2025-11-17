@@ -1,6 +1,6 @@
 package com.user.application.mappers.response;
 
-import com.user.application.dto.response.UserResponseDTO;
+import com.user.application.models.response.UserResponseDTO;
 import com.user.domain.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

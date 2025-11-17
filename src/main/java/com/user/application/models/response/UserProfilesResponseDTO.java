@@ -1,4 +1,4 @@
-package com.user.application.dto.response;
+package com.user.application.models.response;
 
 import lombok.Builder;
 import lombok.Data;

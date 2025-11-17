@@ -1,6 +1,6 @@
 package com.user.application.mappers.response;
 
-import com.user.application.dto.response.AddressResponseDTO;
+import com.user.application.models.response.AddressResponseDTO;
 import com.user.domain.entities.Address;
 import com.user.fixtures.application.response.AddressResponseDTOHelper;
 import com.user.fixtures.domain.AddressHelper;

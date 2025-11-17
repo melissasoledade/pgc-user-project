@@ -1,6 +1,6 @@
 package com.user.application.services;
 
-import com.user.application.dto.response.UserPreferencesResponseDTO;
+import com.user.application.models.response.UserPreferencesResponseDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.mappers.response.UserPreferencesResponseMapper;
 import com.user.domain.entities.UserPreferences;

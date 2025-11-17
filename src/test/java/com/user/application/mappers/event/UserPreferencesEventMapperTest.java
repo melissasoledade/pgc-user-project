@@ -1,6 +1,6 @@
 package com.user.application.mappers.event;
 
-import com.user.application.dto.event.UserPreferencesEvent;
+import com.user.application.models.event.UserPreferencesEvent;
 import com.user.domain.entities.UserPreferences;
 import com.user.fixtures.application.event.UserPreferencesEventHelper;
 import com.user.fixtures.domain.UserPreferencesHelper;

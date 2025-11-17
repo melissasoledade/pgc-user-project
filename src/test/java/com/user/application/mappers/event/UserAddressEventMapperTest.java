@@ -1,6 +1,6 @@
 package com.user.application.mappers.event;
 
-import com.user.application.dto.event.UserAddressEvent;
+import com.user.application.models.event.UserAddressEvent;
 import com.user.domain.entities.Address;
 import com.user.fixtures.application.event.UserAddressEventHelper;
 import com.user.fixtures.domain.AddressHelper;

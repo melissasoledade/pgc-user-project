@@ -1,7 +1,7 @@
 package com.user.fixtures.application.event;
 
-import com.user.application.dto.EventType;
-import com.user.application.dto.event.UserEvent;
+import com.user.application.models.EventType;
+import com.user.application.models.event.UserEvent;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;

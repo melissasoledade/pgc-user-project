@@ -1,7 +1,7 @@
 package com.user.application.services.publisher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.user.application.dto.event.UserEvent;
+import com.user.application.models.event.UserEvent;
 import com.user.fixtures.application.event.UserEventHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

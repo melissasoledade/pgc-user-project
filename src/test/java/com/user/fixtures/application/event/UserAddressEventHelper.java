@@ -1,6 +1,6 @@
 package com.user.fixtures.application.event;
 
-import com.user.application.dto.event.UserAddressEvent;
+import com.user.application.models.event.UserAddressEvent;
 
 import java.math.BigDecimal;
 

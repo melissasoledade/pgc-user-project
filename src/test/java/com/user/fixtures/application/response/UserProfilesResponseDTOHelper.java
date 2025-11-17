@@ -1,6 +1,6 @@
 package com.user.fixtures.application.response;
 
-import com.user.application.dto.response.UserProfilesResponseDTO;
+import com.user.application.models.response.UserProfilesResponseDTO;
 
 public class UserProfilesResponseDTOHelper {
 
