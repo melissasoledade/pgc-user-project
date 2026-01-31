@@ -1,5 +1,6 @@
 package com.user.application.services;
 
+import com.gravity9.jsonpatch.Patch;
 import com.user.application.models.EventType;
 import com.user.application.models.event.UserEvent;
 import com.user.application.models.request.UserDTO;
@@ -78,6 +79,19 @@ public class UserService {
         publishUserEvent(savedUser, EventType.UPDATE);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
+    }
+
+    public Optional<UserResponseDTO> patchUser(Long id, Patch patch) {
+        final Optional<User> user = this.repository.findUserById(id);
+
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+
+        // método para atualizar com patch
+        // salvar no banco
+        // mapear User para UserResponseDTO
+        return Optional.empty();
     }
 
     public UserResponseDTO deleteUser(Long id) {
