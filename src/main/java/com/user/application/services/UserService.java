@@ -1,6 +1,9 @@
 package com.user.application.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gravity9.jsonpatch.JsonPatchException;
 import com.gravity9.jsonpatch.Patch;
+import com.user.application.mappers.UserPartiallyUpdatedMapper;
 import com.user.application.models.EventType;
 import com.user.application.models.event.UserEvent;
 import com.user.application.models.request.UserDTO;
@@ -27,6 +30,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
+    private final UserPartiallyUpdatedMapper userPartiallyUpdatedMapper;
     private final BaseUserRepository repository;
     private final UserEventPublisher publisher;
     private final UserEventMapper userEventMapper;
@@ -39,6 +43,11 @@ public class UserService {
     private User updateUserAndSave(User user, UserDTO userDTO) {
         this.userUpdatedMapper.updateUserFromDTO(userDTO, user);
         return this.repository.saveUser(user);
+    }
+
+    private User updateUserPartiallyAndSave(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
+        final User updatedUser = userPartiallyUpdatedMapper.applyPatchToUser(user, patch);
+        return this.repository.saveUser(updatedUser);
     }
 
     public UserResponseDTO getUser(Long id) {
@@ -81,17 +90,16 @@ public class UserService {
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
 
-    public Optional<UserResponseDTO> patchUser(Long id, Patch patch) {
+    public Optional<UserResponseDTO> patchUser(Long id, Patch patch) throws JsonPatchException, JsonProcessingException {
         final Optional<User> user = this.repository.findUserById(id);
 
         if (user.isEmpty()) {
             return Optional.empty();
         }
 
-        // método para atualizar com patch
-        // salvar no banco
-        // mapear User para UserResponseDTO
-        return Optional.empty();
+        final User savedUser = updateUserPartiallyAndSave(user.get(), patch);
+
+        return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
 
     public UserResponseDTO deleteUser(Long id) {

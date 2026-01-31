@@ -1,6 +1,8 @@
 package com.user.application.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gravity9.jsonpatch.JsonPatch;
+import com.gravity9.jsonpatch.JsonPatchException;
 import com.user.application.models.request.UserDTO;
 import com.user.application.models.response.UserResponseDTO;
 import com.user.application.services.UserService;
@@ -69,7 +71,7 @@ public class RestUserController {
     @Operation(summary = "Partially update a user by id",
             description = "Performs a partial update on a user by updating only the fields present in the request body")
     @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
-    public ResponseEntity<?> patchUser(@PathVariable Long id, @RequestBody JsonPatch patch) {
+    public ResponseEntity<?> patchUser(@PathVariable Long id, @RequestBody JsonPatch patch) throws JsonPatchException, JsonProcessingException {
         Optional<UserResponseDTO> response = this.userService.patchUser(id, patch);
 
         if (response.isEmpty()) {
@@ -77,7 +79,7 @@ public class RestUserController {
         }
 
         log.info("User fields updated with id {}", response.get().getUserId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @Operation(summary = "Delete a user by id", description = "Delete a user using the given id")
