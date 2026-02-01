@@ -1,6 +1,8 @@
 package com.user.application.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gravity9.jsonpatch.JsonPatch;
+import com.gravity9.jsonpatch.ReplaceOperation;
 import com.user.application.models.request.UserDTO;
 import com.user.application.services.UserService;
 import com.user.domain.entities.User;
@@ -20,11 +22,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.text.ParseException;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -145,7 +149,7 @@ class RestUserControllerIT {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.userId").isNumber())
+                .andExpect(jsonPath("$.userId").exists())
                 .andExpect(jsonPath("$.name").value("Bruna Pereira"))
                 .andExpect(jsonPath("$.email").value("bruna.pereira@gmail.com"))
                 .andExpect(jsonPath("$.gender").value("feminine"))
@@ -168,6 +172,28 @@ class RestUserControllerIT {
                         .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId").isNumber())
+                .andExpect(jsonPath("$.name").value("Ana da Silva"))
+                .andExpect(jsonPath("$.email").value("ana-novo-email@gmail.com"))
+                .andExpect(jsonPath("$.gender").value("feminine"))
+                .andExpect(jsonPath("$.address").exists())
+                .andExpect(jsonPath("$.userPreferences").exists())
+                .andExpect(jsonPath("$.userProfiles").exists());
+    }
+
+    @Transactional
+    @Test
+    void shouldUpdateUserPartiallyWithSuccess() throws Exception {
+        // given
+        final JsonPatch patch = new JsonPatch(List.of(
+                new ReplaceOperation("/email", objectMapper.valueToTree("ana-novo-email@gmail.com"))
+        ));
+
+        //when & then
+        this.mvc.perform(patch("/user/{id}", firstUserSaved.getId())
+                        .contentType(MediaType.valueOf("application/json-patch+json"))
+                        .content(objectMapper.writeValueAsString(patch)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.userId").value(firstUserSaved.getId()))
                 .andExpect(jsonPath("$.name").value("Ana da Silva"))
                 .andExpect(jsonPath("$.email").value("ana-novo-email@gmail.com"))
                 .andExpect(jsonPath("$.gender").value("feminine"))

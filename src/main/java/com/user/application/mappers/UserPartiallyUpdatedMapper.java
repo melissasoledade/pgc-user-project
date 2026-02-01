@@ -7,10 +7,8 @@ import com.gravity9.jsonpatch.JsonPatchException;
 import com.gravity9.jsonpatch.Patch;
 import com.user.domain.entities.User;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import org.springframework.stereotype.Component;
 
-@Builder
 @AllArgsConstructor
 @Component
 public class UserPartiallyUpdatedMapper {
