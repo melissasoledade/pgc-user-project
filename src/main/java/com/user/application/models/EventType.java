@@ -9,6 +9,7 @@ public enum EventType {
 
     CREATION("creation", "USER_CREATION"),
     UPDATE("update", "USER_UPDATE"),
+    PARTIAL_UPDATE("partial_update", "USER_PARTIAL_UPDATE"),
     DELETION("deletion", "USER_DELETION");
 
     private final String type;

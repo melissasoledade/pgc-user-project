@@ -18,11 +18,13 @@ import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -37,6 +39,11 @@ public class UserService {
 
     private void publishUserEvent(User user, EventType eventType) {
         final UserEvent userEvent = this.userEventMapper.fromUser(user, eventType);
+        this.publisher.publishMessage(userEvent);
+    }
+
+    private void publishUserEventWithPatch(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
+        final UserEvent userEvent = this.userEventMapper.fromPatch(user, patch, EventType.PARTIAL_UPDATE);
         this.publisher.publishMessage(userEvent);
     }
 
@@ -98,6 +105,7 @@ public class UserService {
         }
 
         final User savedUser = updateUserPartiallyAndSave(user.get(), patch);
+        publishUserEventWithPatch(savedUser, patch);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }
