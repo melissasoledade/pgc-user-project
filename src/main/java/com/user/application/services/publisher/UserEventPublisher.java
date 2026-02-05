@@ -1,5 +1,6 @@
 package com.user.application.services.publisher;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.user.application.models.event.UserEvent;
@@ -20,7 +21,10 @@ public class UserEventPublisher {
     private String snsTopicName;
 
     private void publish(UserEvent message) throws JsonProcessingException {
-        String payload = objectMapper.writeValueAsString(message);
+        ObjectMapper nonNullMapper = objectMapper.copy();
+        nonNullMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        String payload = nonNullMapper.writeValueAsString(message);
         this.snsNotificationService.publishMessage(snsTopicName, payload);
     }
 

@@ -1,5 +1,6 @@
 package com.user.application.services.publisher;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.user.application.models.event.UserEvent;
 import com.user.fixtures.application.event.UserEventHelper;
@@ -38,7 +39,9 @@ class UserEventPublisherIT {
         publisher.publishMessage(event);
 
         // then
-        final String expectedPayload = objectMapper.writeValueAsString(event);
+        final ObjectMapper nonNullMapper = objectMapper.copy();
+        nonNullMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        final String expectedPayload = nonNullMapper.writeValueAsString(event);
 
         verify(snsNotificationService)
                 .publishMessage(snsTopicName, expectedPayload);

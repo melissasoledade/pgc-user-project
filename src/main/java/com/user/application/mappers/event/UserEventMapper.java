@@ -12,6 +12,7 @@ import com.user.application.models.event.UserEvent;
 import com.user.domain.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.time.ZoneId;
 @Builder
 @AllArgsConstructor
 @Component
+@Slf4j
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserEventMapper {
 
@@ -43,15 +45,28 @@ public class UserEventMapper {
     public UserEvent fromPatch(User user, Patch patch, EventType eventType)
             throws JsonPatchException, JsonProcessingException {
 
+        ObjectMapper nonNullMapper = objectMapper.copy();
+        nonNullMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
         final UserDataEvent baseEventData = UserDataEvent.builder()
                 .userId(user.getId())
                 .build();
 
-        final JsonNode baseNode = objectMapper.valueToTree(baseEventData);
-        final JsonNode patchedNode = patch.apply(baseNode);
+        JsonNode baseNode = objectMapper.valueToTree(baseEventData);
+        JsonNode patchedNode = patch.apply(baseNode);
 
-        final UserDataEvent patchedEventData =
+        // JsonNode -> POJO (contains nulls)
+        UserDataEvent temp =
                 objectMapper.treeToValue(patchedNode, UserDataEvent.class);
+
+        String jsonWithoutNulls =
+                nonNullMapper.writeValueAsString(temp);
+
+        // Deserialize clean object
+        UserDataEvent patchedEventData =
+                objectMapper.readValue(jsonWithoutNulls, UserDataEvent.class);
+
+        log.info("json without null {}, eventData {}", jsonWithoutNulls, patchedEventData);
 
         return UserEvent.builder()
                 .eventType(eventType)
