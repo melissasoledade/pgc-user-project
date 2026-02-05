@@ -21,10 +21,10 @@ public class UserEventPublisher {
     private String snsTopicName;
 
     private void publish(UserEvent message) throws JsonProcessingException {
-        ObjectMapper nonNullMapper = objectMapper.copy();
+        final ObjectMapper nonNullMapper = objectMapper.copy();
         nonNullMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        String payload = nonNullMapper.writeValueAsString(message);
+        final String payload = nonNullMapper.writeValueAsString(message);
         this.snsNotificationService.publishMessage(snsTopicName, payload);
     }
 
