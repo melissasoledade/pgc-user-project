@@ -1,5 +1,8 @@
 package com.user.application.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gravity9.jsonpatch.JsonPatch;
+import com.gravity9.jsonpatch.JsonPatchException;
 import com.user.application.models.request.UserDTO;
 import com.user.application.models.response.UserResponseDTO;
 import com.user.application.services.UserService;
@@ -8,15 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +65,20 @@ public class RestUserController {
         }
 
         log.info("User updated with id {}", response.get().getUserId());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @Operation(summary = "Partially update a user by id",
+            description = "Performs a partial update on a user by updating only the fields present in the request body")
+    @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
+    public ResponseEntity<?> patchUser(@PathVariable Long id, @RequestBody JsonPatch patch) throws JsonPatchException, JsonProcessingException {
+        Optional<UserResponseDTO> response = this.userService.patchUser(id, patch);
+
+        if (response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(empty());
+        }
+
+        log.info("User fields updated with id {}", response.get().getUserId());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

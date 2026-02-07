@@ -1,5 +1,9 @@
 package com.user.application.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gravity9.jsonpatch.JsonPatchException;
+import com.gravity9.jsonpatch.Patch;
+import com.user.application.mappers.UserPartiallyUpdatedMapper;
 import com.user.application.models.EventType;
 import com.user.application.models.event.UserEvent;
 import com.user.application.models.request.UserDTO;
@@ -14,11 +18,13 @@ import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -26,6 +32,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
+    private final UserPartiallyUpdatedMapper userPartiallyUpdatedMapper;
     private final BaseUserRepository repository;
     private final UserEventPublisher publisher;
     private final UserEventMapper userEventMapper;
@@ -35,9 +42,19 @@ public class UserService {
         this.publisher.publishMessage(userEvent);
     }
 
+    private void publishUserEventWithPatch(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
+        final UserEvent userEvent = this.userEventMapper.fromPatch(user, patch, EventType.PARTIAL_UPDATE);
+        this.publisher.publishMessage(userEvent);
+    }
+
     private User updateUserAndSave(User user, UserDTO userDTO) {
         this.userUpdatedMapper.updateUserFromDTO(userDTO, user);
         return this.repository.saveUser(user);
+    }
+
+    private User updateUserPartiallyAndSave(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
+        final User updatedUser = userPartiallyUpdatedMapper.applyPatchToUser(user, patch);
+        return this.repository.saveUser(updatedUser);
     }
 
     public UserResponseDTO getUser(Long id) {
@@ -76,6 +93,19 @@ public class UserService {
 
         final User savedUser = updateUserAndSave(user.get(), userDTO);
         publishUserEvent(savedUser, EventType.UPDATE);
+
+        return Optional.of(this.userResponseMapper.fromUser(savedUser));
+    }
+
+    public Optional<UserResponseDTO> patchUser(Long id, Patch patch) throws JsonPatchException, JsonProcessingException {
+        final Optional<User> user = this.repository.findUserById(id);
+
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+
+        final User savedUser = updateUserPartiallyAndSave(user.get(), patch);
+        publishUserEventWithPatch(savedUser, patch);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
     }

@@ -39,6 +39,9 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.14")
 	implementation("org.apache.commons:commons-lang3:3.18.0")
 
+	implementation("com.gravity9:json-patch-path:2.0.2")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
