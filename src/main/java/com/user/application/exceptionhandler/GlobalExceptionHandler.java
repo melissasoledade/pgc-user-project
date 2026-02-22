@@ -3,6 +3,7 @@ package com.user.application.exceptionhandler;
 import com.user.application.models.exception.ExceptionDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
+import com.user.domain.exceptions.InvalidBirthDateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,5 +35,16 @@ public class GlobalExceptionHandler {
                 .errors(List.of(ex.getMessage()))
                 .build();
         return new ResponseEntity<>(exceptionDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({InvalidBirthDateException.class})
+    public ResponseEntity<ExceptionDTO> invalidUserException(RuntimeException ex) {
+        final ExceptionDTO exceptionDTO = ExceptionDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.name())
+                .errors(List.of(ex.getMessage()))
+                .build();
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
 }

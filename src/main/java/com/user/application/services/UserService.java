@@ -17,6 +17,7 @@ import com.user.application.mappers.response.UserResponseMapper;
 import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
+import com.user.domain.services.UserDomainService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,13 @@ public class UserService {
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
     private final UserPartiallyUpdatedMapper userPartiallyUpdatedMapper;
+    private final UserEventMapper userEventMapper;
+
     private final BaseUserRepository repository;
     private final UserEventPublisher publisher;
-    private final UserEventMapper userEventMapper;
+
+    private final UserDomainService userDomainService;
+
 
     private void publishUserEvent(User user, EventType eventType) {
         final UserEvent userEvent = this.userEventMapper.fromUser(user, eventType);
@@ -78,6 +83,8 @@ public class UserService {
 
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
+        userDomainService.validateUser(user);
+
         final User savedUser = this.repository.saveUser(user);
         publishUserEvent(savedUser, EventType.CREATION);
 

@@ -13,6 +13,7 @@ import com.user.application.mappers.response.UserResponseMapper;
 import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
+import com.user.domain.services.UserDomainService;
 import com.user.fixtures.application.event.UserEventHelper;
 import com.user.fixtures.application.request.UserDTOHelper;
 import com.user.fixtures.application.response.UserResponseDTOHelper;
@@ -57,6 +58,9 @@ class UserServiceTest {
 
     @Mock
     private UserEventMapper userEventMapper;
+
+    @Mock
+    private UserDomainService userDomainService;
 
     @InjectMocks
     private UserService service;
