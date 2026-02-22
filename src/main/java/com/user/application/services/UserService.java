@@ -83,9 +83,9 @@ public class UserService {
 
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
-        userDomainService.validateUser(user);
+        final User validatedUser = this.userDomainService.validateUser(user);
 
-        final User savedUser = this.repository.saveUser(user);
+        final User savedUser = this.repository.saveUser(validatedUser);
         publishUserEvent(savedUser, EventType.CREATION);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));

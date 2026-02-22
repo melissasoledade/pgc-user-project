@@ -159,6 +159,7 @@ class UserServiceTest {
         when(this.userEventMapper.fromUser(savedUser, EventType.CREATION)).thenReturn(userEvent);
         when(this.repository.saveUser(user)).thenReturn(savedUser);
         when(this.userResponseMapper.fromUser(savedUser)).thenReturn(userResponseDTO);
+        when(this.userDomainService.validateUser(user)).thenReturn(user);
 
         // when
         final Optional<UserResponseDTO> result = this.service.createUser(userDTO);

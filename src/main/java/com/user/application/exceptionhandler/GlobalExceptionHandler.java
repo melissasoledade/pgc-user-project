@@ -1,9 +1,11 @@
 package com.user.application.exceptionhandler;
 
+import com.google.i18n.phonenumbers.NumberParseException;
 import com.user.application.models.exception.ExceptionDTO;
 import com.user.application.exceptionhandler.exceptions.UserNotFoundException;
 import com.user.application.exceptionhandler.exceptions.UsersNotFoundException;
 import com.user.domain.exceptions.InvalidBirthDateException;
+import com.user.domain.exceptions.InvalidPhoneNumberException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -37,7 +39,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionDTO, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({InvalidBirthDateException.class})
+    @ExceptionHandler({InvalidBirthDateException.class,
+                       InvalidPhoneNumberException.class,
+                       NumberParseException.class})
     public ResponseEntity<ExceptionDTO> invalidUserException(RuntimeException ex) {
         final ExceptionDTO exceptionDTO = ExceptionDTO.builder()
                 .timestamp(LocalDateTime.now())
