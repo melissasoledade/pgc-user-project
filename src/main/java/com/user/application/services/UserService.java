@@ -54,12 +54,14 @@ public class UserService {
 
     private User updateUserAndSave(User user, UserDTO userDTO) {
         this.userUpdatedMapper.updateUserFromDTO(userDTO, user);
-        return this.repository.saveUser(user);
+        final User validatedUser = userDomainService.validateUser(user);
+        return this.repository.saveUser(validatedUser);
     }
 
     private User updateUserPartiallyAndSave(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
         final User updatedUser = userPartiallyUpdatedMapper.applyPatchToUser(user, patch);
-        return this.repository.saveUser(updatedUser);
+        final User validatedUser = userDomainService.validateUser(updatedUser);
+        return this.repository.saveUser(validatedUser);
     }
 
     public UserResponseDTO getUser(Long id) {

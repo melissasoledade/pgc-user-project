@@ -199,6 +199,7 @@ class UserServiceTest {
             userArg.setEmail(dtoArg.getEmail());
             return null;
         }).when(this.userUpdatedMapper).updateUserFromDTO(userDTO, user);
+        when(this.userDomainService.validateUser(user)).thenReturn(user);
 
         // when
         final Optional<UserResponseDTO> result = this.service.updateUser(4L, userDTO);

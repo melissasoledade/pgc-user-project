@@ -29,20 +29,17 @@ public class UserDomainService {
        return age >= MINIMUM_AGE;
     }
 
-    public User validatePhoneNumber(User user) {
+    public String validatePhoneNumber(String phoneNumberStr) {
         final PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
 
         try {
-            final PhoneNumber phoneNumber = phoneUtil.parse(user.getPhoneNumber(), DEFAULT_COUNTRY_CODE);
+            final PhoneNumber phoneNumber = phoneUtil.parse(phoneNumberStr, DEFAULT_COUNTRY_CODE);
 
             if (!phoneUtil.isValidNumber(phoneNumber)) {
                 throw new InvalidPhoneNumberException();
             }
 
-            final String formattedPhoneNumber = phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164);
-            user.setPhoneNumber(formattedPhoneNumber);
-
-            return user;
+            return phoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164);
         } catch (NumberParseException e) {
             throw new InvalidPhoneNumberException();
         }
@@ -53,6 +50,8 @@ public class UserDomainService {
             throw new InvalidBirthDateException();
         }
 
-        return validatePhoneNumber(user);
+        String validPhoneNumber = validatePhoneNumber(user.getPhoneNumber());
+        user.setPhoneNumber(validPhoneNumber);
+        return user;
     }
 }
