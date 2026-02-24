@@ -13,6 +13,7 @@ import com.user.application.mappers.response.UserResponseMapper;
 import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
+import com.user.domain.services.UserDomainService;
 import com.user.fixtures.application.event.UserEventHelper;
 import com.user.fixtures.application.request.UserDTOHelper;
 import com.user.fixtures.application.response.UserResponseDTOHelper;
@@ -57,6 +58,9 @@ class UserServiceTest {
 
     @Mock
     private UserEventMapper userEventMapper;
+
+    @Mock
+    private UserDomainService userDomainService;
 
     @InjectMocks
     private UserService service;
@@ -155,6 +159,7 @@ class UserServiceTest {
         when(this.userEventMapper.fromUser(savedUser, EventType.CREATION)).thenReturn(userEvent);
         when(this.repository.saveUser(user)).thenReturn(savedUser);
         when(this.userResponseMapper.fromUser(savedUser)).thenReturn(userResponseDTO);
+        when(this.userDomainService.validateUser(user)).thenReturn(user);
 
         // when
         final Optional<UserResponseDTO> result = this.service.createUser(userDTO);
@@ -194,6 +199,7 @@ class UserServiceTest {
             userArg.setEmail(dtoArg.getEmail());
             return null;
         }).when(this.userUpdatedMapper).updateUserFromDTO(userDTO, user);
+        when(this.userDomainService.validateUser(user)).thenReturn(user);
 
         // when
         final Optional<UserResponseDTO> result = this.service.updateUser(4L, userDTO);

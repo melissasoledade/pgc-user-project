@@ -17,6 +17,7 @@ import com.user.application.mappers.response.UserResponseMapper;
 import com.user.application.services.publisher.UserEventPublisher;
 import com.user.domain.entities.User;
 import com.user.domain.repositories.BaseUserRepository;
+import com.user.domain.services.UserDomainService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,13 @@ public class UserService {
     private final UserResponseMapper userResponseMapper;
     private final UserUpdatedMapper userUpdatedMapper;
     private final UserPartiallyUpdatedMapper userPartiallyUpdatedMapper;
+    private final UserEventMapper userEventMapper;
+
     private final BaseUserRepository repository;
     private final UserEventPublisher publisher;
-    private final UserEventMapper userEventMapper;
+
+    private final UserDomainService userDomainService;
+
 
     private void publishUserEvent(User user, EventType eventType) {
         final UserEvent userEvent = this.userEventMapper.fromUser(user, eventType);
@@ -49,12 +54,14 @@ public class UserService {
 
     private User updateUserAndSave(User user, UserDTO userDTO) {
         this.userUpdatedMapper.updateUserFromDTO(userDTO, user);
-        return this.repository.saveUser(user);
+        final User validatedUser = userDomainService.validateUser(user);
+        return this.repository.saveUser(validatedUser);
     }
 
     private User updateUserPartiallyAndSave(User user, Patch patch) throws JsonPatchException, JsonProcessingException {
         final User updatedUser = userPartiallyUpdatedMapper.applyPatchToUser(user, patch);
-        return this.repository.saveUser(updatedUser);
+        final User validatedUser = userDomainService.validateUser(updatedUser);
+        return this.repository.saveUser(validatedUser);
     }
 
     public UserResponseDTO getUser(Long id) {
@@ -78,7 +85,9 @@ public class UserService {
 
     public Optional<UserResponseDTO> createUser(UserDTO userDTO) {
         final User user = this.userMapper.toUser(userDTO);
-        final User savedUser = this.repository.saveUser(user);
+        final User validatedUser = this.userDomainService.validateUser(user);
+
+        final User savedUser = this.repository.saveUser(validatedUser);
         publishUserEvent(savedUser, EventType.CREATION);
 
         return Optional.of(this.userResponseMapper.fromUser(savedUser));
