@@ -50,7 +50,7 @@ public class UserDomainService {
             throw new InvalidBirthDateException();
         }
 
-        String validPhoneNumber = validatePhoneNumber(user.getPhoneNumber());
+        final String validPhoneNumber = validatePhoneNumber(user.getPhoneNumber());
         user.setPhoneNumber(validPhoneNumber);
         return user;
     }
