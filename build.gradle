@@ -62,4 +62,15 @@ tasks.named('test', Test) {
 		showStandardStreams = true
 		exceptionFormat = 'full'
 	}
+
+	afterSuite { desc, result ->
+		if (!desc.parent) {
+			println "\n===== TEST SUMMARY ====="
+			println "Total tests: ${result.testCount}"
+			println "Passed: ${result.successfulTestCount}"
+			println "Failed: ${result.failedTestCount}"
+			println "Skipped: ${result.skippedTestCount}"
+			println "========================\n"
+		}
+	}
 }
